@@ -24,7 +24,9 @@ const { Content } = await render(latestPost);
     {
       olderPost ? (
         <p class="footer">
-          <a href={`/blog/${olderPost.id}/`}>prev</a>
+          <a href={`/blog/${olderPost.id}/`} rel="prefetch">
+            prev
+          </a>
         </p>
       ) : <p class="footer">the end<span class="red">;</span></p>
     }
