@@ -6,7 +6,7 @@ publishDate: 2026-07-09T01:08:56.101Z
 
 - wanted to learn astro
 - cloudflare pages ci/cd is ezpz
-- because I can
+- because i can
 - it's fun
 
 one thing i learned as i got older, is that you can just do things

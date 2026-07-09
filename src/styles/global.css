@@ -1,5 +1,5 @@
 :root {
-  --content-width: 840px;
+  --content-width: 1300px;
 }
 
 * {
@@ -30,9 +30,15 @@ a:hover {
 }
 
 main {
-  margin-left: 2rem;
-  padding: 2rem;
+  padding: 1rem 1rem 0rem 1rem;
   max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding: 2rem 2rem 0rem 2rem;
+  }
 }
 
 article {
@@ -114,10 +120,13 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 2rem;
 }
 
-.footer {
-  margin-top: 4rem;
+@media (min-width: 768px) {
+  .footer-div {
+    margin-top: 4rem;
+  }
 }
 
 .red {
