@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import catGif from "@/images/catgif.gif";
 ---
 
 <BaseLayout>
@@ -13,7 +12,15 @@ import catGif from "@/images/catgif.gif";
   </script>
 
   <div class="intro-cat">
-    <img src={catGif.src} alt="cat going nutz" />
+		<img
+			class="cat-gif"
+			src="/cat.gif"
+			alt="cat going nutz"
+			width="220"
+			height="220"
+			fetchpriority="high"
+			decoding="async"
+		/>
   </div>
 
   <div class="home-content">

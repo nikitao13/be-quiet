@@ -191,9 +191,12 @@ ul li::before {
     fade-out-cat var(--cat-fade-time) forwards var(--cat-intro-time);
 }
 
-.intro-cat img {
+.cat-gif {
   width: var(--cat-size);
+  height: var(--cat-size);
+  object-fit: contain;
   display: block;
+  background: transparent;
 }
 
 html.skip-home-intro .intro-cat {
