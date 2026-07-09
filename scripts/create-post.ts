@@ -7,13 +7,15 @@ const BLOG_DIR = path.join(process.cwd(), "src", "content", "blog");
 const envSchema = z.object({
   BLOG_TITLE: z.string().trim().min(1, "title is required."),
   BLOG_SUBTITLE: z.string().trim().optional().default(""),
-  BLOG_SLUG: z.string().trim().optional().default(""),
+  BLOG_DESCRIPTION: z.string().trim().min(1, "description is required."),
+  BLOG_SLUG: z.string().trim().min(1, "slug is required."),
 });
 
 const env = envSchema.parse(process.env);
 
 const title = env.BLOG_TITLE;
 const subtitle = env.BLOG_SUBTITLE;
+const description = env.BLOG_DESCRIPTION;
 const slugInput = env.BLOG_SLUG;
 
 const slugify = (value: string) => {
@@ -33,7 +35,7 @@ const isNodeError = (error: unknown): error is NodeJS.ErrnoException => {
   return error instanceof Error;
 };
 
-const slug = slugify(slugInput || title);
+const slug = slugify(slugInput);
 
 if (!slug) {
   throw new Error("could not create a valid slug.");
@@ -59,7 +61,8 @@ const publishDate = new Date().toISOString();
 const content = [
   "---",
   `title: "${escapeYamlString(title)}"`,
-  subtitle ? `subtitle: "${escapeYamlString(subtitle)}"` : `subtitle: ""`,
+  `subtitle: "${escapeYamlString(subtitle)}"`,
+  `description: "${escapeYamlString(description)}"`,
   `publishDate: ${publishDate}`,
   "---",
   "",

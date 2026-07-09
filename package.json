@@ -16,6 +16,7 @@
     "verify": "npm ci && npm run build"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "@fontsource-variable/lora": "^5.2.8",
     "astro": "^7.0.6"
   },

@@ -1,6 +1,7 @@
 ---
 title: "how i built this blog; and why"
 subtitle: "why even bother?"
+description: "how i built my personal blog using astro, markdown, github and cloudflare pages"
 publishDate: 2026-07-09T01:08:56.101Z
 ---
 

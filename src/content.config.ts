@@ -1,4 +1,3 @@
-// src/content.config.ts
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
@@ -11,8 +10,8 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     subtitle: z.string().optional(),
+    description: z.string(),
     publishDate: z.coerce.date(),
-    description: z.string().optional(),
   }),
 });
 

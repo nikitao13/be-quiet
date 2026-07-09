@@ -93,7 +93,7 @@ ul li::before {
   color: var(--color-accent);
 }
 
-/* Blog */
+/* blog */
 
 .blog-title {
   font-size: 32px;
@@ -140,7 +140,7 @@ ul li::before {
   font-size: 14px;
 }
 
-/* Home */
+/* home */
 
 .links {
   font-size: 20px;
@@ -172,7 +172,7 @@ ul li::before {
     calc(var(--cat-intro-time) + 0.2s);
 }
 
-/* Intro cat */
+/* intro cat */
 
 .intro-cat {
   position: fixed;
@@ -206,7 +206,7 @@ html.skip-home-intro .home-content {
   animation: none;
 }
 
-/* Footer */
+/* footer */
 
 .footer-div {
   display: flex;
@@ -221,7 +221,7 @@ html.skip-home-intro .home-content {
   }
 }
 
-/* Animations */
+/* animations */
 
 @keyframes fade-in-cat {
   to {
