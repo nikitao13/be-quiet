@@ -1,0 +1,32 @@
+---
+import { render } from "astro:content";
+import { getLatestBlogPost, getBlogPostNav } from "@/lib/blog";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const latestPost = await getLatestBlogPost();
+const { olderPost } = await getBlogPostNav(latestPost.id);
+const { Content } = await render(latestPost);
+---
+
+<BaseLayout title={latestPost.data.title}>
+  <article>
+    <h1 class="blog-title">{latestPost.data.title}</h1>
+    <h2 class="blog-subtitle">{latestPost.data.subtitle}</h2>
+
+    <div class="blog-content">
+      <Content />
+    </div>
+  </article>
+
+  <div class="footer-div">
+    <p class="footer"><a href="/">home</a></p>
+    
+    {
+      olderPost ? (
+        <p class="footer">
+          <a href={`/blog/${olderPost.id}/`}>prev</a>
+        </p>
+      ) : <p class="footer">the end<span class="red">;</span></p>
+    }
+  </div>
+</BaseLayout>

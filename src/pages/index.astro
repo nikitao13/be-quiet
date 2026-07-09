@@ -1,15 +1,14 @@
 ---
-
+import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>just a blog</title>
-	</head>
-	<body>
-		<h1>a blog</h1>
+<BaseLayout>
+		<body>
+		<h1 class="blog-title">nikita o'keeffe<span class="red">;</span> a personal / dev website<span class="red">.</span></h1>
+		<ul>
+			<li class="links"><a href="/blog">my blog</a></li>
+			<li class="links"><a href="https://www.github.com/nikitao13" target="_blank">github</a></li>
+			<li class="links"><a href="https://www.linkedin.com/in/nikitaokeeffe" target="_blank">linkedIn</a></li>
+		</ul>
 	</body>
-</html>
+</BaseLayout>

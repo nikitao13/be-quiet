@@ -1,0 +1,125 @@
+:root {
+  --content-width: 840px;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html {
+  background: #000;
+  color: #fff;
+  font-family: var(--font-lora), serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #d1d2d2;
+}
+
+main {
+  margin-left: 2rem;
+  padding: 2rem;
+  max-width: var(--content-width);
+}
+
+article {
+  line-height: 1.7;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding-left: 1.5rem;
+}
+
+ul li {
+  position: relative;
+}
+
+ul li::before {
+  content: "-";
+  position: absolute;
+  left: -1rem;
+  color: red;
+}
+
+.blog-title {
+  font-size: 32px;
+  margin-bottom: 0.5rem;
+}
+
+.blog-subtitle {
+  font-size: 24px;
+  padding-left: 0.25rem;
+  font-style: italic;
+}
+
+.blog-content {
+  max-width: var(--content-width);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.blog-content h1 {
+  font-size: 24px;
+}
+
+.blog-content h2 {
+  font-size: 22px;
+}
+
+.blog-content h3 {
+  font-size: 20px;
+}
+
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+  font-size: 18px;
+}
+
+.blog-content p,
+li {
+  font-size: 16px;
+}
+
+.blog-content small {
+  font-size: 14px;
+}
+
+.links {
+  font-size: 20px;
+}
+
+.footer-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer {
+  margin-top: 4rem;
+}
+
+.red {
+  color: red;
+}
