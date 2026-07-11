@@ -1,0 +1,100 @@
+name: Cloudflare deployment notifications
+
+on:
+  push:
+    branches:
+      - main
+
+  check_run:
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+env:
+  NTFY_URL: https://ntfy.sh/${{ secrets.NTFY_TOPIC }}
+  PROJECT_NAME: nikitao13 website
+  SITE_URL: https://nikitao13.com
+
+jobs:
+  notify-started:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send deployment started notification
+        shell: bash
+        env:
+          BRANCH: ${{ github.ref_name }}
+          COMMIT_SHA: ${{ github.sha }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          SHORT_COMMIT="${COMMIT_SHA:0:7}"
+
+          MESSAGE=$(printf '%s\n' \
+            "project: $PROJECT_NAME" \
+            "branch: $BRANCH" \
+            "commit: $SHORT_COMMIT" \
+            "message: $COMMIT_MESSAGE")
+
+          curl \
+            --fail-with-body \
+            --retry 3 \
+            --header "Title: 🚀 deployment started" \
+            --header "Priority: default" \
+            --header "Click: $SITE_URL" \
+            --data-binary "$MESSAGE" \
+            "$NTFY_URL"
+
+  notify-completed:
+    if: >
+      github.event_name == 'check_run' &&
+      github.event.check_run.app.name == 'Cloudflare Workers and Pages' &&
+      github.event.check_run.check_suite.head_branch == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read deployment result
+        id: deployment
+        shell: bash
+        env:
+          CONCLUSION: ${{ github.event.check_run.conclusion }}
+        run: |
+          if [[ "$CONCLUSION" == "success" ]]; then
+            echo "title=deployed successfully" >> "$GITHUB_OUTPUT"
+            echo "emoji=✅" >> "$GITHUB_OUTPUT"
+            echo "priority=default" >> "$GITHUB_OUTPUT"
+          else
+            echo "title=deployment failed" >> "$GITHUB_OUTPUT"
+            echo "emoji=❌" >> "$GITHUB_OUTPUT"
+            echo "priority=high" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Send deployment result notification
+        shell: bash
+        env:
+          NOTIFICATION_TITLE: >-
+            ${{ steps.deployment.outputs.emoji }}
+            ${{ steps.deployment.outputs.title }}
+          PRIORITY: ${{ steps.deployment.outputs.priority }}
+          BRANCH: ${{ github.event.check_run.check_suite.head_branch }}
+          COMMIT_SHA: ${{ github.event.check_run.head_sha }}
+          CLICK_URL: ${{ github.event.check_run.details_url }}
+          CHECK_NAME: ${{ github.event.check_run.name }}
+        run: |
+          SHORT_COMMIT="${COMMIT_SHA:0:7}"
+
+          MESSAGE=$(printf '%s\n' \
+            "project: $PROJECT_NAME" \
+            "branch: $BRANCH" \
+            "commit: $SHORT_COMMIT" \
+            "check: $CHECK_NAME")
+
+          curl \
+            --fail-with-body \
+            --retry 3 \
+            --header "Title: $NOTIFICATION_TITLE" \
+            --header "Priority: $PRIORITY" \
+            --header "Click: ${CLICK_URL:-$SITE_URL}" \
+            --data-binary "$MESSAGE" \
+            "$NTFY_URL"
