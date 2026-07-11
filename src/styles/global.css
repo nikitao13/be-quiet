@@ -9,6 +9,7 @@
 
   --color-accent: #b11226;
   --color-accent-bright: #ff1744;
+  --color-positive-bright: #39ff88cd;
 
   --cat-intro-time: 2.5s;
   --cat-fade-time: 0.4s;
@@ -61,17 +62,12 @@ body {
 
 a {
   color: var(--color-text);
+  transition: var(--color-transition);
   text-decoration: none;
 }
 
 a:hover {
   color: var(--color-accent-bright);
-}
-
-a,
-p,
-span {
-  transition: var(--color-transition);
 }
 
 main {
@@ -118,6 +114,10 @@ ul li::before {
   position: absolute;
   left: -1rem;
   color: var(--color-accent);
+}
+
+.hidden {
+  display: none;
 }
 
 /* blog */

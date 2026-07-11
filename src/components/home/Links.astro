@@ -1,22 +1,44 @@
 ---
-import TerminalLinks from "@/components/terminal/TerminalLinks.astro";
+import TerminalInfo from "@/components/terminal/TerminalInfo.astro";
 
 const links = [
   {
     label: "blog",
-    href: "/blog",
+    labelHref: "/blog",
   },
   {
     label: "github",
-    href: "https://github.com/nikitao13",
-    external: true,
+    labelHref: "https://github.com/nikitao13",
+    labelExternal: true,
   },
   {
     label: "linkedin",
-    href: "https://www.linkedin.com/in/nikitaokeeffe",
-    external: true,
+    labelHref: "https://www.linkedin.com/in/nikitaokeeffe",
+    labelExternal: true,
+  },
+  {
+    label: "twitter",
+    labelHref: "https://www.x.com/lvl99str",
+    labelExternal: true,
+  },
+    {
+    label: "discord",
+    labelHref: "https://discord.gg/zjf3w8DJSh",
+    labelExternal: true,
+    desktopOnly: true,
+  },
+  {
+    label: "steam",
+    labelHref: "https://steamcommunity.com/id/13x13x13x13/",
+    labelExternal: true,
+    desktopOnly: true,
   },
 ];
 ---
 
-<TerminalLinks links={links} />
+<TerminalInfo
+  as="nav"
+  prompt="nikitao13@main:~$"
+  ariaLabel="site links"
+  items={links}
+/>

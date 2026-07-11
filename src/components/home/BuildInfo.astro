@@ -4,10 +4,16 @@ import { getBuildData } from "@/lib/build";
 
 const buildData = getBuildData();
 
+const astroMobileVersion = buildData.astro
+  .split(".")
+  .slice(0, 2)
+  .join(".");
+
 const items = [
   {
     label: "astro",
     value: buildData.astro,
+    mobileValue: astroMobileVersion,
   },
   {
     label: "branch",

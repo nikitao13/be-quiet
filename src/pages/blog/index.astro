@@ -8,6 +8,8 @@ const latestPost = await getLatestBlogPost();
 ---
 
 <BaseLayout title={latestPost.data.title}>
+  <div class="hidden">
   <Post post={latestPost} />
   <PostFooter postId={latestPost.id} />
+  </div>
 </BaseLayout>
