@@ -172,6 +172,10 @@ ul li::before {
     calc(var(--cat-intro-time) + 0.2s);
 }
 
+.build-info {
+  color: black;
+}
+
 /* intro cat */
 
 .intro-cat {

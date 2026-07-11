@@ -1,5 +1,10 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+
+import { getBuildData } from "@/lib/build";
+
+const buildData = getBuildData();
+const { built, commit, branch, astro, platform } = buildData;
 ---
 
 <BaseLayout>
@@ -41,8 +46,8 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         <h3>playing:</h3>
         <ul>
           <li><a href="https://store.steampowered.com/app/3489700/Stellar_Blade/" target="_blank">stellar blade</a></li>
+					<li><a href="https://store.steampowered.com/app/1364780/Street_Fighter_6/" target="_blank">street fighter 6</a></li>
           <li><a href="https://store.steampowered.com/app/1384160/GUILTY_GEAR_STRIVE/" target="_blank">guilty gear strive</a></li>
-          <li><a href="https://store.steampowered.com/app/1364780/Street_Fighter_6/" target="_blank">street fighter 6</a></li>
           <li><a href="https://store.steampowered.com/app/2273430/BlazBlue_Entropy_Effect/" target="_blank">blazblue entropy effect</a></li>
           <li><a href="https://oldschool.runescape.com/" target="_blank">old school runescape</a></li>
         </ul>
@@ -53,22 +58,38 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         <ul>
           <li><a href="https://www.imdb.com/title/tt2356777/" target="_blank">true detective</a></li>
           <li><a href="https://www.imdb.com/title/tt12590266/" target="_blank">cyberpunk: edgerunners</a></li>
+					<li><a href="https://www.imdb.com/title/tt3114390/" target="_blank">kill la kill</a></li>
           <li><a href="https://www.imdb.com/title/tt0994314/" target="_blank">code geass</a></li>
-          <li><a href="https://www.imdb.com/title/tt3114390/" target="_blank">kill la kill</a></li>
-          <li><a href="https://www.imdb.com/title/tt1910272/" target="_blank">steins; gate</a></li>
+        </ul>
+      </div>
+
+
+      <div class="currently-listening">
+        <h3>listening:</h3>
+        <ul>
+          <li><a href="">deftones</a></li>
+					<li><a href="">tool</a></li>
+          <li><a href="">parkway drive</a></li>
+          <li><a href="">bring me the horizon</a></li>
         </ul>
       </div>
 
       <div class="currently-reading">
         <h3>reading:</h3>
         <ul>
+					<li><a href="">java: a beginners guide</a></li>
           <li><a href="">algorithms to live by</a></li>
-          <li><a href="">life 3.0</a></li>
-          <li><a href="">grokking algorithms</a></li>
-          <li><a href="">java: a beginners guide</a></li>
           <li><a href="">the order of time</a></li>
         </ul>
       </div>
     </div>
+
+		<div class="build-info">
+			<p>built: {buildData.built}</p>
+			<p>commit: {buildData.commit}</p>
+			<p>branch: {buildData.branch}</p>
+			<p>astro: {buildData.astro}</p>
+			<p>deployed: {buildData.platform}</p>
+		</div>
   </div>
 </BaseLayout>

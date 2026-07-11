@@ -12,8 +12,8 @@ publishDate: 2026-07-09T01:08:56.101Z
 
 one thing i learned as i got older, is that you can just do things
 
-simple things like this make me happy;\
-and i should cherish them before i merge with AI
+building things like this make me happy;\
+and i should cherish them before i merge with AI completely
 
 anyway, this is a very simple static blog built with:
 
