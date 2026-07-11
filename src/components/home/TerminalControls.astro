@@ -1,0 +1,103 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div
+  class="terminal-controls"
+  data-terminal-controls
+  aria-label={`${title} terminal controls`}
+>
+  <button
+    class="terminal-control terminal-close"
+    type="button"
+    data-terminal-action="close"
+    aria-label={`Close ${title} terminal`}
+    title="Close"
+  ></button>
+
+  <button
+    class="terminal-control terminal-toggle"
+    type="button"
+    data-terminal-action="toggle"
+    aria-label={`Minimise ${title} terminal`}
+    title="Minimise"
+    aria-expanded="true"
+  ></button>
+</div>
+
+<script>
+  import { initialiseTerminalControls } from "@/lib/terminal";
+  initialiseTerminalControls();
+</script>
+
+<style>
+  .terminal-controls {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0.4rem;
+  }
+
+  .terminal-control {
+    width: 0.7rem;
+    height: 0.7rem;
+    padding: 0;
+
+    cursor: pointer;
+
+    border: 0;
+    border-radius: 50%;
+
+    transition:
+      background-color var(--motion-duration-base) var(--motion-easing),
+      filter var(--motion-duration-fast) var(--motion-easing),
+      transform var(--motion-duration-fast) var(--motion-easing);
+  }
+
+  .terminal-close {
+    background: #ff5f57;
+  }
+
+  .terminal-toggle {
+    background: #febc2e;
+  }
+
+  :global(.terminal-list.is-minimised) .terminal-toggle {
+    background: #28c840;
+  }
+
+  .terminal-control:hover {
+    filter: brightness(1.2);
+    transform: scale(1.08);
+  }
+
+  .terminal-control:active {
+    transform: scale(0.92);
+  }
+
+  .terminal-control:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-control {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .terminal-control {
+      width: 0.56rem;
+      height: 0.56rem;
+    }
+
+    .terminal-controls {
+      gap: 0.32rem;
+    }
+  }
+</style>

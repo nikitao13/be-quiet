@@ -1,4 +1,6 @@
 ---
+import TerminalControls from "@/components/home/TerminalControls.astro";
+
 interface Props {
   title: string;
   prompt?: string;
@@ -10,14 +12,22 @@ const {
 } = Astro.props;
 ---
 
-<section class="terminal-list">
+<section class="terminal-list" data-terminal-title={title}>
   <div class="terminal-list-header">
-    <span class="terminal-list-prompt">{prompt}</span>
-    <span class="terminal-list-command">cat {title}.txt</span>
+    <div class="terminal-list-title">
+      <span class="terminal-list-prompt">{prompt}</span>
+      <span class="terminal-list-command">cat {title}.txt</span>
+    </div>
+
+    <TerminalControls title={title} />
   </div>
 
-  <div class="terminal-list-content">
-    <slot />
+  <div class="terminal-list-collapse">
+    <div class="terminal-list-content-wrapper">
+      <div class="terminal-list-content">
+        <slot />
+      </div>
+    </div>
   </div>
 </section>
 
@@ -28,7 +38,6 @@ const {
     overflow: hidden;
 
     font-family: var(--terminal-font);
-    /* font-size: 0.75rem; */
     font-size: clamp(0.6rem, 2vw, 0.75rem);
     line-height: 1.5;
 
@@ -41,12 +50,29 @@ const {
   .terminal-list-header {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: space-between;
+    gap: 1rem;
 
     padding: var(--terminal-padding-block) var(--terminal-padding-inline);
 
     white-space: nowrap;
     border-bottom: 1px solid var(--terminal-border-color);
+
+    transition:
+      border-color var(--motion-duration-base) var(--motion-easing);
+  }
+
+  .terminal-list.is-minimised .terminal-list-header {
+    border-bottom-color: transparent;
+  }
+
+  .terminal-list-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    min-width: 0;
+    overflow: hidden;
   }
 
   .terminal-list-prompt {
@@ -54,7 +80,39 @@ const {
   }
 
   .terminal-list-command {
+    overflow: hidden;
     color: var(--color-muted);
+    text-overflow: ellipsis;
+  }
+
+  .terminal-list-collapse {
+    display: grid;
+    grid-template-rows: 1fr;
+
+    visibility: visible;
+    opacity: 1;
+
+    transition:
+      grid-template-rows var(--motion-duration-layout) var(--motion-easing),
+      opacity var(--motion-duration-fast) var(--motion-easing),
+      visibility 0s;
+  }
+
+  .terminal-list.is-minimised .terminal-list-collapse {
+    grid-template-rows: 0fr;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition:
+      grid-template-rows var(--motion-duration-layout) var(--motion-easing),
+      opacity var(--motion-duration-fast) var(--motion-easing),
+      visibility 0s var(--motion-duration-layout);
+  }
+
+  .terminal-list-content-wrapper {
+    min-height: 0;
+    overflow: hidden;
   }
 
   .terminal-list-content {
@@ -98,6 +156,13 @@ const {
       width: 100%;
       min-width: 0;
       font-size: 0.8rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-list-header,
+    .terminal-list-collapse {
+      transition: none;
     }
   }
 </style>

@@ -24,18 +24,18 @@ import TerminalList from "@/components/home/TerminalList.astro";
 
   <TerminalList title="listening">
   <ul>
-    <li><a href="">deftones</a></li>
-    <li><a href="">tool</a></li>
-    <li><a href="">parkway drive</a></li>
-    <li><a href="">bring me the horizon</a></li>
+    <li>deftones</li>
+    <li>tool</li>
+    <li>parkway drive</li>
+    <li>bring me the horizon</li>
   </ul>
 </TerminalList>
 
   <TerminalList title="reading">
     <ul>
-		  <li><a href="">java: a beginners guide</a></li>
-      <li><a href="">algorithms to live by</a></li>
-      <li><a href="">the order of time</a></li>
+		  <li>java: a beginners guide</li>
+      <li>algorithms to live by</li>
+      <li>the order of time</li>
     </ul>
   </TerminalList>
 </div>
@@ -46,5 +46,13 @@ import TerminalList from "@/components/home/TerminalList.astro";
     grid-template-columns: 1fr;
     gap: 0.75rem;
     width: 100%;
+  }
+
+  .terminal-lists :global(li:hover) {
+    color: var(--color-text);
+  }
+
+  .terminal-lists :global(a) {
+    cursor: default;
   }
 </style>
