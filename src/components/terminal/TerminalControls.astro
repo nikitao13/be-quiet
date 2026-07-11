@@ -62,7 +62,6 @@ const { title } = Astro.props;
 
         if (!(target instanceof Element)) return;
 
-        // The button already has its own click handler.
         if (target.closest("[data-terminal-toggle]")) return;
 
         toggleTerminal();

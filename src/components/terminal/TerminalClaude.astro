@@ -1,0 +1,33 @@
+---
+import TerminalList from "@/components/terminal/TerminalList.astro";
+import AnimatedText from "@/components/ui/AnimatedText.astro";
+
+interface Props {
+  output: string;
+  model? string;
+}
+
+const {
+  output,
+  model="claude"
+} = Astro.props;
+---
+
+<TerminalList cmd="/analyse" prompt="claude@fable5:~$" title="easter-egg.md" ext="">
+  <div class="thinking-line">
+    <span class="red">{model}: </span> 
+    <AnimatedText text="thinking..." />
+  </div>
+
+  <div class="claude-output">
+    <span class="red">{model}: </span>
+    {output}
+  </div>
+</TerminalList>
+
+<style>
+  .thinking-line,
+  .claude-output {
+    margin: 0;
+  }
+</style>

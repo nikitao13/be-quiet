@@ -3,6 +3,9 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import CatIntro from "@/components/home/CatIntro.astro";
 import HomeHero from "@/components/home/HomeHero.astro";
 import CurrentlyDoing from "@/components/home/CurrentlyDoing.astro";
+import TerminalClaude from "@/components/terminal/TerminalClaude.astro";
+
+
 ---
 
 <BaseLayout preloadCat>
@@ -11,5 +14,6 @@ import CurrentlyDoing from "@/components/home/CurrentlyDoing.astro";
   <div class="home-content">
     <HomeHero />
     <CurrentlyDoing />
-  </div>
+		<TerminalClaude output="try a dragon punch." model="claude@fable" />	
+</div>
 </BaseLayout>

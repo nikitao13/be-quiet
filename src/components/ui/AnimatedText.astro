@@ -1,0 +1,77 @@
+---
+interface Props {
+  text: string;
+  ariaLabel?: string;
+  class?: string;
+  duration?: string;
+  stagger?: string;
+}
+
+const {
+  text,
+  ariaLabel = text,
+  class: className,
+  duration = "1.2s",
+  stagger = "80ms",
+} = Astro.props;
+---
+
+<span
+  class:list={["animated-text", className]}
+  aria-label={ariaLabel}
+  style={`--animated-text-duration: ${duration}; --animated-text-stagger: ${stagger};`}
+>
+  {
+    [...text].map((character, index) => (
+      <span
+        aria-hidden="true"
+        style={`--animated-text-index: ${index}`}
+      >
+        {character === " " ? "\u00A0" : character}
+      </span>
+    ))
+  }
+</span>
+
+<style>
+  .animated-text {
+    display: inline-flex;
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  .animated-text span {
+    color: var(--color-muted);
+    animation: animated-character
+      var(--animated-text-duration)
+      var(--motion-easing)
+      infinite;
+    animation-delay: calc(
+      var(--animated-text-index) * var(--animated-text-stagger)
+    );
+  }
+
+  @keyframes animated-character {
+    0%,
+    55%,
+    100% {
+      color: var(--color-muted);
+      opacity: 0.55;
+      transform: translateY(0);
+    }
+
+    20% {
+      color: var(--color-text);
+      opacity: 1;
+      transform: translateY(-0.06em);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animated-text span {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

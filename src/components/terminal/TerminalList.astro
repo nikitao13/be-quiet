@@ -2,13 +2,17 @@
 import TerminalControls from "@/components/terminal/TerminalControls.astro";
 
 interface Props {
+  cmd?: string,
   title: string;
   prompt?: string;
+  ext?: string;
 }
 
 const {
+  cmd="cat",
   title,
   prompt = "nikitao13@main:~$",
+  ext=".txt"
 } = Astro.props;
 ---
 
@@ -16,7 +20,7 @@ const {
   <div class="terminal-list-header">
     <div class="terminal-list-title">
       <span class="terminal-list-prompt">{prompt}</span>
-      <span class="terminal-list-command">cat {title}.txt</span>
+      <span class="terminal-list-command">{cmd} {title}{ext}</span>
     </div>
 
     <TerminalControls title={title} />

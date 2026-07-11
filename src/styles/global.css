@@ -145,8 +145,24 @@ ul li::before {
   list-style-type: circle;
 }
 
-.red {
+.accent {
   color: var(--color-accent);
+}
+
+.green {
+  color: var(--color-accent-green);
+}
+
+.blue {
+  color: var(--color-accent-blue);
+}
+
+.red {
+  color: var(--color-accent-red);
+}
+
+.white {
+  color: var(--color-text);
 }
 
 .home-content {
