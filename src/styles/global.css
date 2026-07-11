@@ -109,35 +109,6 @@ ul li::before {
 
 .blog-content {
   max-width: var(--content-width);
-  font-size: 18px;
-  line-height: 1.7;
-}
-
-.blog-content h1 {
-  font-size: 24px;
-}
-
-.blog-content h2 {
-  font-size: 22px;
-}
-
-.blog-content h3 {
-  font-size: 20px;
-}
-
-.blog-content h4,
-.blog-content h5,
-.blog-content h6 {
-  font-size: 18px;
-}
-
-.blog-content p,
-.blog-content li {
-  font-size: 16px;
-}
-
-.blog-content small {
-  font-size: 14px;
 }
 
 /* home */

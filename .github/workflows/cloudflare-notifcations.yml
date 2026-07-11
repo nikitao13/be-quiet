@@ -14,7 +14,7 @@ permissions:
 
 env:
   NTFY_URL: https://ntfy.sh/${{ secrets.NTFY_TOPIC }}
-  PROJECT_NAME: nikitao13 website
+  PROJECT_NAME: nikitao13
   SITE_URL: https://nikitao13.com
 
 jobs:
@@ -83,12 +83,13 @@ jobs:
           CHECK_NAME: ${{ github.event.check_run.name }}
         run: |
           SHORT_COMMIT="${COMMIT_SHA:0:7}"
+          LOWER_CHECK_NAME="${CHECK_NAME,,}"
 
           MESSAGE=$(printf '%s\n' \
             "project: $PROJECT_NAME" \
             "branch: $BRANCH" \
             "commit: $SHORT_COMMIT" \
-            "check: $CHECK_NAME")
+            "check: $LOWER_CHECK_NAME")
 
           curl \
             --fail-with-body \

@@ -13,14 +13,14 @@ const { Content } = await render(latestPost);
     <h1 class="blog-title">{latestPost.data.title}</h1>
     <h2 class="blog-subtitle">{latestPost.data.subtitle}</h2>
 
-    <div class="blog-content">
+    <div class="blog-content typeset typeset-blog">
       <Content />
     </div>
   </article>
 
   <div class="footer-div">
     <p class="footer"><a href="/">home</a></p>
-    
+
     {
       olderPost ? (
         <p class="footer">

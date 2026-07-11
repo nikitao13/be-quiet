@@ -1,0 +1,186 @@
+.typeset {
+  --typeset-font-body: var(--font-lora), serif;
+  --typeset-font-heading: var(--font-lora), serif;
+  --typeset-font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  --typeset-size: 1rem;
+  --typeset-leading: 1.75;
+  --typeset-flow: 1.25em;
+
+  --typeset-color-text: var(--color-text);
+  --typeset-color-muted: var(--color-muted);
+  --typeset-color-accent: var(--color-accent-bright);
+  --typeset-color-border: color-mix(
+    in srgb,
+    var(--color-text) 18%,
+    transparent
+  );
+  --typeset-color-code-bg: var(--color-surface);
+
+  font-family: var(--typeset-font-body);
+  font-size: var(--typeset-size);
+  line-height: var(--typeset-leading);
+  color: var(--typeset-color-text);
+}
+
+.typeset :where(h1, h2, h3, h4, h5, h6, p, ul, ol, pre, blockquote, table, hr) {
+  margin-block: 0;
+}
+
+.typeset-blog {
+  --typeset-size: 1rem;
+  --typeset-leading: 1.8;
+  --typeset-flow: 1.35em;
+}
+
+@media (min-width: 768px) {
+  .typeset-blog {
+    --typeset-size: 1.05rem;
+    --typeset-flow: 1.5em;
+  }
+}
+
+/* flow spacing: every block creates its own top space */
+.typeset :where(* + *) {
+  margin-block-start: var(--typeset-flow);
+}
+
+/* headings */
+.typeset :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--typeset-font-heading);
+  line-height: 1.2;
+  margin-block-start: calc(var(--typeset-flow) * 1.8);
+  text-wrap: balance;
+}
+
+.typeset :where(h1) {
+  font-size: 2rem;
+}
+
+.typeset :where(h2) {
+  font-size: 1.5rem;
+}
+
+.typeset :where(h3) {
+  font-size: 1.25rem;
+}
+
+.typeset :where(h4, h5, h6) {
+  font-size: 1rem;
+}
+
+/* avoid huge gap when a heading is first inside article */
+.typeset :where(h1:first-child, h2:first-child, h3:first-child) {
+  margin-block-start: 0;
+}
+
+/* paragraphs */
+.typeset :where(p) {
+  margin-block-start: var(--typeset-flow);
+}
+
+/* links */
+.typeset :where(a) {
+  color: var(--typeset-color-text);
+  text-decoration-color: var(--typeset-color-accent);
+  text-underline-offset: 0.2em;
+}
+
+.typeset :where(a:hover) {
+  color: var(--typeset-color-accent);
+}
+
+/* lists */
+.typeset :where(ul, ol) {
+  padding-inline-start: 1.5em;
+}
+
+.typeset :where(ul) {
+  list-style: none;
+}
+
+.typeset :where(ul > li) {
+  position: relative;
+}
+
+.typeset :where(ul > li)::before {
+  content: "-";
+  position: absolute;
+  left: -1em;
+  color: var(--typeset-color-accent);
+}
+
+.typeset :where(ol) {
+  list-style: decimal;
+}
+
+.typeset :where(li + li) {
+  margin-block-start: 0.35em;
+}
+
+/* code */
+.typeset :where(code) {
+  font-family: var(--typeset-font-mono);
+  font-size: 0.9em;
+  background: var(--typeset-color-code-bg);
+  border: 1px solid var(--typeset-color-border);
+  border-radius: 0.35rem;
+  padding: 0.15em 0.35em;
+}
+
+.typeset :where(pre) {
+  overflow-x: auto;
+  background: var(--typeset-color-code-bg);
+  border: 1px solid var(--typeset-color-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.typeset :where(pre code) {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* quotes */
+.typeset :where(blockquote) {
+  border-inline-start: 3px solid var(--typeset-color-accent);
+  padding-inline-start: 1rem;
+  color: var(--typeset-color-muted);
+  font-style: italic;
+}
+
+/* rules */
+.typeset :where(hr) {
+  border: 0;
+  border-block-start: 1px solid var(--typeset-color-border);
+  margin-block-start: calc(var(--typeset-flow) * 2);
+}
+
+/* tables */
+.typeset :where(table) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+
+.typeset :where(th, td) {
+  border-block-start: 1px solid var(--typeset-color-border);
+  padding: 0.6em 0.75em;
+  text-align: left;
+  vertical-align: top;
+}
+
+.typeset :where(th) {
+  color: var(--typeset-color-text);
+  font-weight: 700;
+}
+
+.typeset-scroll {
+  overflow-x: auto;
+}
