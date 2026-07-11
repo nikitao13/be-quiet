@@ -3,28 +3,52 @@ import { Font } from "astro:assets";
 import "@/styles/global.css";
 import "@/styles/typeset.css";
 
+interface Props {
+  title?: string;
+  description?: string;
+  preloadCat?: boolean;
+}
+
 const {
   title = "nikitao13",
   description = "personal blog by nikitao13.",
+  preloadCat = false,
 } = Astro.props;
+
+const pageTitle =
+  title === "nikitao13"
+    ? title
+    : `${title} | nikitao13`;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
-    <Font cssVariable="--font-lora" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link
-      rel="preload"
-      as="image"
-      href="/cat.gif"
-      type="image/gif"
-      fetchpriority="high"
-    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <Font cssVariable="--font-lora" />
+
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <title>{title}</title>
+
+    {
+      preloadCat && (
+        <link
+          rel="preload"
+          as="image"
+          href="/cat.gif"
+          type="image/gif"
+          fetchpriority="high"
+        />
+      )
+    }
   </head>
 
   <body>

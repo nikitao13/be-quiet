@@ -1,7 +1,9 @@
 ---
-import { render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getSortedBlogPosts, getBlogPostNav } from "@/lib/blog";
+import Post from "@/components/blog/Post.astro";
+import PostFooter from "@/components/blog/PostFooter.astro";
+import { getSortedBlogPosts } from "@/lib/blog";
 
 export const getStaticPaths = async () => {
   const posts = await getSortedBlogPosts();
@@ -12,30 +14,14 @@ export const getStaticPaths = async () => {
   }));
 };
 
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
 const { post } = Astro.props;
-const { Content } = await render(post);
-const { olderPost } = await getBlogPostNav(post.id);
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article>
-    <h1 class="blog-title">{post.data.title}</h1>
-    <h2 class="blog-subtitle">{post.data.subtitle}</h2>
-
-    <div class="blog-content">
-      <Content />
-    </div>
-  </article>
-
-  <div class="footer-div">
-    <p class="footer"><a href="/">home</a></p>
-    
-    {
-      olderPost ? (
-        <p class="footer">
-          <a href={`/blog/${olderPost.id}/`}>prev</a>
-        </p>
-      ) : <p class="footer">the end<span class="red">;</span></p>
-    }
-  </div>
+  <Post post={post} />
+  <PostFooter postId={post.id} />
 </BaseLayout>

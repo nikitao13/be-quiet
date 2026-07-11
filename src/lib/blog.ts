@@ -34,7 +34,7 @@ export const getBlogPostNav = async (
 }> => {
   const posts = await getSortedBlogPosts();
 
-  const currentIndex = posts.findIndex(post => post.id === currentPostId);
+  const currentIndex = posts.findIndex((post) => post.id === currentPostId);
 
   if (currentIndex === -1) {
     throw new Error(`blog post not found: ${currentPostId}`);

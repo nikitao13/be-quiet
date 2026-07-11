@@ -1,0 +1,14 @@
+---
+import { getBuildData } from "@/lib/build";
+
+const buildData = getBuildData();
+---
+
+<div class="build-info" aria-label="build information">
+  <span class="build-prompt">nikitao13@blog:~$</span>
+  <span>astro {buildData.astro}</span>
+  <span class="build-info-desktop">branch {buildData.branch}</span>
+  <span>commit {buildData.commit}</span>
+  <span class="build-info-desktop">deployed {buildData.platform}</span>
+  <span>built {buildData.built}</span>
+</div>

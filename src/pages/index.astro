@@ -1,95 +1,14 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-
-import { getBuildData } from "@/lib/build";
-
-const buildData = getBuildData();
-const { built, commit, branch, astro, platform } = buildData;
+import CatIntro from "@/components/home/CatIntro.astro";
+import HomeHero from "@/components/home/HomeHero.astro";
+import CurrentlyDoing from "@/components/home/CurrentlyDoing.astro";
 ---
 
-<BaseLayout>
-	<script is:inline>
-    if (sessionStorage.getItem("hasSeenHomeIntro") === "true") {
-      document.documentElement.classList.add("skip-home-intro");
-    } else {
-      sessionStorage.setItem("hasSeenHomeIntro", "true");
-    }
-  </script>
-
-  <div class="intro-cat">
-		<img
-			class="cat-gif"
-			src="/cat.gif"
-			alt="cat going nutz"
-			width="220"
-			height="220"
-			fetchpriority="high"
-			decoding="async"
-		/>
-  </div>
-
+<BaseLayout preloadCat>
+	<CatIntro />
   <div class="home-content">
-    <h1 class="blog-title">
-      nikita o'keeffe<span class="red">;</span> a personal/dev website<span class="red">.</span>
-    </h1>
-
-    <ul>
-      <li class="links"><a href="/blog" rel="prefetch">my blog</a></li>
-      <li class="links"><a href="https://www.github.com/nikitao13" target="_blank">github</a></li>
-      <li class="links"><a href="https://www.linkedin.com/in/nikitaokeeffe" target="_blank">linkedIn</a></li>
-    </ul>
-
-    <br />
-
-    <div class="currently-div">
-      <div class="currently-playing">
-        <h3>playing:</h3>
-        <ul>
-          <li><a href="https://store.steampowered.com/app/3489700/Stellar_Blade/" target="_blank">stellar blade</a></li>
-					<li><a href="https://store.steampowered.com/app/1364780/Street_Fighter_6/" target="_blank">street fighter 6</a></li>
-          <li><a href="https://store.steampowered.com/app/1384160/GUILTY_GEAR_STRIVE/" target="_blank">guilty gear strive</a></li>
-          <li><a href="https://store.steampowered.com/app/2273430/BlazBlue_Entropy_Effect/" target="_blank">blazblue entropy effect</a></li>
-          <li><a href="https://oldschool.runescape.com/" target="_blank">old school runescape</a></li>
-        </ul>
-      </div>
-
-      <div class="currently-watching">
-        <h3>watching:</h3>
-        <ul>
-          <li><a href="https://www.imdb.com/title/tt2356777/" target="_blank">true detective</a></li>
-          <li><a href="https://www.imdb.com/title/tt12590266/" target="_blank">cyberpunk: edgerunners</a></li>
-					<li><a href="https://www.imdb.com/title/tt3114390/" target="_blank">kill la kill</a></li>
-          <li><a href="https://www.imdb.com/title/tt0994314/" target="_blank">code geass</a></li>
-        </ul>
-      </div>
-
-
-      <div class="currently-listening">
-        <h3>listening:</h3>
-        <ul>
-          <li><a href="">deftones</a></li>
-					<li><a href="">tool</a></li>
-          <li><a href="">parkway drive</a></li>
-          <li><a href="">bring me the horizon</a></li>
-        </ul>
-      </div>
-
-      <div class="currently-reading">
-        <h3>reading:</h3>
-        <ul>
-					<li><a href="">java: a beginners guide</a></li>
-          <li><a href="">algorithms to live by</a></li>
-          <li><a href="">the order of time</a></li>
-        </ul>
-      </div>
-    </div>
-
-		<div class="build-info">
-			<p>built: {buildData.built}</p>
-			<p>commit: {buildData.commit}</p>
-			<p>branch: {buildData.branch}</p>
-			<p>astro: {buildData.astro}</p>
-			<p>deployed: {buildData.platform}</p>
-		</div>
-  </div>
+    <HomeHero />
+		<CurrentlyDoing />
+	</div>
 </BaseLayout>

@@ -8,7 +8,7 @@ export interface BuildData {
   platform: string;
 }
 
-export function getBuildData(): BuildData {
+export const getBuildData = (): BuildData => {
   return {
     built: new Date().toISOString().split("T")[0],
     commit: process.env.CF_PAGES_COMMIT_SHA?.slice(0, 7) ?? "dev",
@@ -16,4 +16,4 @@ export function getBuildData(): BuildData {
     astro: astroVersion,
     platform: process.env.CF_PAGES ? "cloudflare pages" : "local",
   };
-}
+};

@@ -1,0 +1,19 @@
+	<script is:inline>
+    if (sessionStorage.getItem("catIntroHasPlayed") === "true") {
+      document.documentElement.classList.add("skip-home-intro");
+    } else {
+      sessionStorage.setItem("catIntroHasPlayed", "true");
+    }
+  </script>
+
+  <div class="intro-cat">
+		<img
+			class="cat-gif"
+			src="/cat.gif"
+			alt="cat going nutz"
+			width="220"
+			height="220"
+			fetchpriority="high"
+			decoding="async"
+		/>
+  </div>

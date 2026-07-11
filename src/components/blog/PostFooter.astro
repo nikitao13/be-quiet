@@ -1,0 +1,30 @@
+---
+import { getBlogPostNav } from "@/lib/blog";
+
+interface Props {
+  postId: string;
+}
+
+const { postId } = Astro.props;
+const { olderPost } = await getBlogPostNav(postId);
+---
+
+<div class="footer-div">
+  <p class="footer">
+    <a href="/">home</a>
+  </p>
+
+  {
+    olderPost ? (
+      <p class="footer">
+        <a href={`/blog/${olderPost.id}/`} rel="prefetch">
+          prev
+        </a>
+      </p>
+    ) : (
+      <p class="footer">
+        the end<span class="red">;</span>
+      </p>
+    )
+  }
+</div>
