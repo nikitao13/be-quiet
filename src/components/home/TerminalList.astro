@@ -1,0 +1,103 @@
+---
+interface Props {
+  title: string;
+  prompt?: string;
+}
+
+const {
+  title,
+  prompt = "nikitao13@main:~$",
+} = Astro.props;
+---
+
+<section class="terminal-list">
+  <div class="terminal-list-header">
+    <span class="terminal-list-prompt">{prompt}</span>
+    <span class="terminal-list-command">cat {title}.txt</span>
+  </div>
+
+  <div class="terminal-list-content">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .terminal-list {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+
+    font-family: var(--terminal-font);
+    /* font-size: 0.75rem; */
+    font-size: clamp(0.6rem, 2vw, 0.75rem);
+    line-height: 1.5;
+
+    color: var(--color-muted);
+    background: var(--terminal-background);
+    border: 1px solid var(--terminal-border-color);
+    border-radius: var(--terminal-border-radius);
+  }
+
+  .terminal-list-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: var(--terminal-padding-block) var(--terminal-padding-inline);
+
+    white-space: nowrap;
+    border-bottom: 1px solid var(--terminal-border-color);
+  }
+
+  .terminal-list-prompt {
+    color: var(--color-accent-bright);
+  }
+
+  .terminal-list-command {
+    color: var(--color-muted);
+  }
+
+  .terminal-list-content {
+    padding: 0.55rem var(--terminal-padding-inline) 0.65rem;
+  }
+
+  .terminal-list-content :global(ul) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+  }
+
+  .terminal-list-content :global(li) {
+    position: relative;
+    padding-left: 1.4rem;
+  }
+
+  .terminal-list-content :global(li::before) {
+    content: "--";
+    position: absolute;
+    left: 0;
+
+    color: var(--terminal-prefix-color);
+  }
+
+  .terminal-list-content :global(a) {
+    color: var(--color-muted);
+  }
+
+  .terminal-list-content :global(a:hover) {
+    color: var(--color-text);
+  }
+
+  @media (min-width: 768px) {
+    .terminal-list {
+      width: 100%;
+      min-width: 0;
+      font-size: 0.8rem;
+    }
+  }
+</style>

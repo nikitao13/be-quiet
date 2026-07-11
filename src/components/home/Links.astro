@@ -1,13 +1,22 @@
 ---
-const blog = "/blog";
-const github = "https://www.github.com/nikitao13";
-const linkedIn = "https://www.linkedin.com/in/nikitaokeeffe"
+import TerminalLinks from "@/components/home/TerminalLinks.astro";
+
+const links = [
+  {
+    label: "blog",
+    href: "/blog",
+  },
+  {
+    label: "github",
+    href: "https://github.com/nikitao13",
+    external: true,
+  },
+  {
+    label: "linkedin",
+    href: "https://www.linkedin.com/in/nikitaokeeffe",
+    external: true,
+  },
+];
 ---
 
-<ul>
-  <li class="links"><a href={blog} rel="prefetch">my blog</a></li>
-  <li class="links"><a href={github} target="_blank">github</a></li>
-  <li class="links"><a href={linkedIn} target="_blank">linkedIn</a></li>
-</ul>
-
-<br />
+<TerminalLinks links={links} />

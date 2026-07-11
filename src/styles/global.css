@@ -1,7 +1,6 @@
 :root {
   --content-width: 1300px;
 
-  /* --color-bg: #050505; */
   --color-bg: #000;
   --color-surface: #0d0d0d;
 
@@ -14,6 +13,23 @@
   --cat-intro-time: 2.5s;
   --cat-fade-time: 0.4s;
   --cat-size: min(70vw, 220px);
+
+  --color-transition: color 0.3s ease;
+
+  /* home spacing */
+  --home-section-gap: 0.75rem;
+  --home-hero-gap: 1rem;
+
+  /* terminal */
+  --terminal-font:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --terminal-background: rgba(13, 13, 13, 0.9);
+  --terminal-border-color: #262626;
+  --terminal-prefix-color: #666;
+  --terminal-border-radius: 0.35rem;
+  --terminal-padding-inline: 0.7rem;
+  --terminal-padding-block: 0.45rem;
 }
 
 * {
@@ -39,11 +55,16 @@ body {
 a {
   color: var(--color-text);
   text-decoration: none;
-  transition: color 0.3s ease;
 }
 
 a:hover {
   color: var(--color-accent-bright);
+}
+
+a,
+p,
+span {
+  transition: var(--color-transition);
 }
 
 main {
@@ -121,74 +142,16 @@ ul li::before {
   color: var(--color-accent);
 }
 
-.currently-div {
+.home-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-}
+  gap: var(--home-section-gap);
+  font-family: var(--terminal-font), serif;
 
-@media (min-width: 768px) {
-  .currently-div {
-    flex-direction: row;
-    gap: 2rem;
-  }
-}
-
-.home-content {
   opacity: 0;
   visibility: hidden;
   animation: fade-in-content var(--cat-fade-time) forwards
     calc(var(--cat-intro-time) + 0.2s);
-}
-
-.build-info {
-  display: flex;
-  align-items: center;
-  gap: clamp(0.35rem, 2vw, 0.75rem);
-
-  width: fit-content;
-  max-width: 100%;
-  padding: 0.45rem clamp(0.45rem, 2vw, 0.7rem);
-  margin-bottom: 0.75rem;
-
-  overflow-x: auto;
-  white-space: nowrap;
-
-  font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
-  line-height: 1;
-  font-size: clamp(0.46rem, 2vw, 0.56rem);
-  color: var(--color-muted);
-  background: rgba(13, 13, 13, 0.9);
-  border: 1px solid #262626;
-  border-radius: 0.35rem;
-}
-
-.build-prompt {
-  color: var(--color-accent-bright);
-}
-
-.build-info span:not(.build-prompt)::before {
-  content: "--";
-  color: #666;
-  margin-right: 0.2rem;
-}
-
-.build-info-desktop {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .build-info {
-    gap: 0.75rem;
-    font-size: 0.69rem;
-  }
-
-  .build-info-desktop {
-    display: inline;
-  }
 }
 
 /* intro cat */

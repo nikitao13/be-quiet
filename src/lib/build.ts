@@ -10,10 +10,10 @@ export interface BuildData {
 
 export const getBuildData = (): BuildData => {
   return {
-    built: new Date().toISOString().split("T")[0],
+    built: new Date().toLocaleDateString("en-AU"),
     commit: process.env.CF_PAGES_COMMIT_SHA?.slice(0, 7) ?? "dev",
     branch: process.env.CF_PAGES_BRANCH ?? "local",
-    astro: astroVersion,
+    astro: astroVersion.split(".").slice(0, 2).join("."),
     platform: process.env.CF_PAGES ? "cloudflare pages" : "local",
   };
 };
