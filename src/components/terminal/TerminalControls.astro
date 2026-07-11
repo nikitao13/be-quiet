@@ -1,0 +1,165 @@
+---
+import { ChevronDown, ChevronUp } from "@lucide/astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<button
+  class="terminal-toggle"
+  type="button"
+  data-terminal-toggle
+  aria-label={`Minimise ${title} terminal`}
+  title="Minimise"
+  aria-expanded="true"
+>
+  <ChevronUp class="terminal-chevron terminal-chevron-up" aria-hidden="true" />
+  <ChevronDown
+    class="terminal-chevron terminal-chevron-down"
+    aria-hidden="true"
+  />
+</button>
+
+<script>
+  const initialiseTerminalToggles = () => {
+    const toggleButtons = document.querySelectorAll<HTMLButtonElement>(
+      "[data-terminal-toggle]",
+    );
+
+    toggleButtons.forEach((toggleButton) => {
+      if (toggleButton.dataset.initialised === "true") return;
+
+      const terminal = toggleButton.closest<HTMLElement>(".terminal-list");
+      const terminalHeader =
+        toggleButton.closest<HTMLElement>(".terminal-list-header");
+
+      if (!terminal || !terminalHeader) return;
+
+      toggleButton.dataset.initialised = "true";
+
+      const toggleTerminal = () => {
+        const isMinimised = terminal.classList.toggle("is-minimised");
+        const terminalTitle = terminal.dataset.terminalTitle ?? "";
+
+        const action = isMinimised ? "Restore" : "Minimise";
+
+        toggleButton.setAttribute("aria-expanded", String(!isMinimised));
+        toggleButton.setAttribute(
+          "aria-label",
+          `${action} ${terminalTitle} terminal`,
+        );
+
+        toggleButton.title = action;
+      };
+
+      toggleButton.addEventListener("click", toggleTerminal);
+
+      terminalHeader.addEventListener("click", (event) => {
+        const target = event.target;
+
+        if (!(target instanceof Element)) return;
+
+        // The button already has its own click handler.
+        if (target.closest("[data-terminal-toggle]")) return;
+
+        toggleTerminal();
+      });
+    });
+  };
+
+  initialiseTerminalToggles();
+</script>
+
+<style>
+  .terminal-toggle {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+
+    color: var(--color-muted);
+    background: transparent;
+    border: 0;
+    border-radius: 0.2rem;
+
+    cursor: pointer;
+
+    transition:
+      color var(--motion-duration-fast) var(--motion-easing),
+      transform var(--motion-duration-fast) var(--motion-easing);
+  }
+
+  .terminal-toggle:hover {
+    color: var(--color-text);
+  }
+
+  .terminal-toggle:active {
+    transform: translateY(1px);
+  }
+
+  .terminal-toggle:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
+  }
+
+  .terminal-chevron {
+    grid-area: 1 / 1;
+    width: 1rem;
+    height: 1rem;
+    color: inherit;
+
+    transition:
+      color var(--motion-duration-fast) var(--motion-easing),
+      opacity var(--motion-duration-fast) var(--motion-easing),
+      transform var(--motion-duration-fast) var(--motion-easing);
+  }
+
+  .terminal-chevron-down {
+    opacity: 0;
+    transform: translateY(-0.15rem);
+  }
+
+  :global(.terminal-list-header) {
+    cursor: pointer;
+  }
+
+  :global(.terminal-list-header:hover .terminal-list-command),
+  :global(.terminal-list-header:hover .terminal-toggle) {
+    color: var(--color-text);
+  }
+
+  :global(.terminal-list.is-minimised) .terminal-chevron-up {
+    opacity: 0;
+    transform: translateY(0.15rem);
+  }
+
+  :global(.terminal-list.is-minimised) .terminal-chevron-down {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-toggle,
+    .terminal-chevron {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .terminal-toggle {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .terminal-chevron {
+      width: 0.85rem;
+      height: 0.85rem;
+    }
+  }
+</style>

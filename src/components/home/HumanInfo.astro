@@ -1,0 +1,45 @@
+---
+import TerminalInfo from "@/components/terminal/TerminalInfo.astro";
+
+const millisecondsPerDay = 1000 * 60 * 60 * 24;
+
+const birthDate = Date.UTC(1996, 8, 13);
+const today = new Date();
+
+const currentDate = Date.UTC(
+  today.getUTCFullYear(),
+  today.getUTCMonth(),
+  today.getUTCDate(),
+);
+
+const daysOld = Math.floor(
+  (currentDate - birthDate) / millisecondsPerDay,
+);
+
+const items = [
+  {
+    label: "location",
+    value: "sydney",
+  },
+  {
+    label: "uptime",
+    value: `${daysOld.toLocaleString("en-AU")} days`,
+  },
+  {
+    label: "status",
+    value: "online",
+    desktopOnly: true,
+  },
+  {
+    label: "theme",
+    value: "terminal",
+    desktopOnly: true,
+  },
+];
+---
+
+<TerminalInfo
+  prompt="system@info:~$"
+  ariaLabel="system information"
+  items={items}
+/>

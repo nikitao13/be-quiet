@@ -1,74 +1,37 @@
 ---
+import TerminalInfo from "@/components/terminal/TerminalInfo.astro";
 import { getBuildData } from "@/lib/build";
 
 const buildData = getBuildData();
+
+const items = [
+  {
+    label: "astro",
+    value: buildData.astro,
+  },
+  {
+    label: "branch",
+    value: buildData.branch,
+  },
+  {
+    label: "commit",
+    value: buildData.commit,
+  },
+  {
+    label: "deployed",
+    value: buildData.platform,
+    desktopOnly: true,
+  },
+  {
+    label: "built",
+    value: buildData.built,
+    desktopOnly: true,
+  },
+];
 ---
 
-<div class="build-info" aria-label="build information">
-  <span class="build-prompt">build@info:~$</span>
-  <span class="build-data">astro {buildData.astro}</span>
-  <span class="build-data">branch {buildData.branch}</span>
-  <span class="build-data">commit {buildData.commit}</span>
-  <span class="build-info-desktop">deployed {buildData.platform}</span>
-  <span class="build-info-desktop">built {buildData.built}</span>
-</div>
-
-<style>
-  .build-info {
-    display: flex;
-    align-items: center;
-    gap: clamp(0.25rem, 1.25vw, 0.5rem);
-
-    width: 100%;
-    max-width: 100%;
-    padding: var(--terminal-padding-block)
-      clamp(0.45rem, 2vw, var(--terminal-padding-inline));
-
-    overflow-x: auto;
-    white-space: nowrap;
-
-    font-family: var(--terminal-font);
-    font-size: clamp(0.6rem, 2vw, 0.75rem);
-    line-height: 1;
-
-    color: var(--color-muted);
-    background: var(--terminal-background);
-    border: 1px solid var(--terminal-border-color);
-    border-radius: var(--terminal-border-radius);
-  }
-
-  .build-prompt {
-    color: var(--color-accent-bright);
-    &:hover {
-     color: var(--color-accent-bright);
-    }
-  }
-
-  .build-info span:not(.build-prompt)::before {
-    content: "--";
-    margin-right: 0.2rem;
-    color: var(--terminal-prefix-color);
-  }
-
-  .build-info-desktop {
-    display: none;
-  }
-
-  .build-data, .build-info-desktop {
-    &:hover {
-      color: var(--color-text);
-    }
-  }
-
-  @media (min-width: 768px) {
-    .build-info {
-      width: fit-content;
-      gap: 0.75rem;
-      font-size: 0.69rem;
-    }
-
-    .build-info-desktop {
-      display: inline;
-    }
-  }
-</style>
+<TerminalInfo
+  prompt="build@info:~$"
+  ariaLabel="build information"
+  items={items}
+/>

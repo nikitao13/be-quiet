@@ -1,17 +1,19 @@
 ---
 import BuildInfo from "@/components/home/BuildInfo.astro";
 import Links from "@/components/home/Links.astro";
+import HumanInfo from "@/components/home/HumanInfo.astro";
 ---
 
 <section class="home-hero">
   <h1 class="blog-title">
-    nikita o'keeffe<span class="red">;</span> a personal/dev website<span
-      class="red">.</span
-    >
+    nikita o'keeffe<span class="red">; </span>
+    <br class="mobile-break" />
+    a static website<span class="red">.</span>
   </h1>
 
   <div class="home-terminal-stack">
     <BuildInfo />
+    <HumanInfo />
     <Links />
   </div>
 </section>
@@ -28,5 +30,15 @@ import Links from "@/components/home/Links.astro";
     flex-direction: column;
     align-items: flex-start;
     gap: var(--home-section-gap);
+  }
+
+  .mobile-break {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .mobile-break {
+      display: block;
+    }
   }
 </style>
