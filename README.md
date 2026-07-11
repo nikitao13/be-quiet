@@ -11,10 +11,10 @@
 `recent updates:`\
 `home ui uplift`\
 `markdown typeset`\
-`ntfy.sh deployment notifications`
+`ntfy.sh deployment notifications`\
+`collapsable .txt viewers`
 
 `future plans:`\
 `improved publish flow`\
 `blog ui uplift`\
-`collapsable .txt viewers`\
 `possibly move homepage content to .md files`

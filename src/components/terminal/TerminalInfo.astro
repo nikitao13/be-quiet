@@ -10,6 +10,9 @@ interface InfoItem {
   labelExternal?: boolean;
   valueExternal?: boolean;
 
+  valueAction?: "cycle-accent";
+  valueAriaLabel?: string;
+
   color?: string;
   desktopOnly?: boolean;
 }
@@ -60,8 +63,15 @@ const getLinkAttributes = (external?: boolean) =>
         <span
           class:list={[
             "terminal-info-data",
-            { "terminal-info-desktop": item.desktopOnly },
+            {
+              "terminal-info-desktop": item.desktopOnly,
+              "terminal-info-action": item.valueAction,
+            },
           ]}
+          data-terminal-action={item.valueAction}
+          role={item.valueAction ? "button" : undefined}
+          tabindex={item.valueAction ? "0" : undefined}
+          aria-label={item.valueAction ? item.valueAriaLabel : undefined}
         >
           <LabelElement
             class="terminal-info-label"
@@ -76,6 +86,9 @@ const getLinkAttributes = (external?: boolean) =>
               {" "}
               <ValueElement
                 class="terminal-info-value"
+                data-terminal-action-value={
+                  item.valueAction ? item.valueAction : undefined
+                }
                 href={item.valueHref}
                 style={{ color: item.color }}
                 {...getLinkAttributes(item.valueExternal)}
@@ -127,11 +140,11 @@ const getLinkAttributes = (external?: boolean) =>
   }
 
   .terminal-info-prompt {
-    color: var(--color-accent-bright);
+    color: var(--color-accent);
   }
 
   .terminal-info-data {
-    transition: var(--color-transition);
+    transition: color var(--motion-duration-fast) var(--motion-easing);
 
     &::before {
       margin-right: 0.2rem;
@@ -160,6 +173,21 @@ const getLinkAttributes = (external?: boolean) =>
     }
   }
 
+  .terminal-info-action {
+    cursor: pointer;
+  }
+
+  .terminal-info-action .terminal-info-value {
+    display: inline-block;
+    inline-size: 5ch;
+  }
+
+  .terminal-info-action:focus-visible {
+    color: var(--color-text);
+    outline: 1px solid var(--color-accent);
+    outline-offset: 0.2rem;
+  }
+
   .terminal-info-desktop,
   .terminal-info-value-desktop {
     display: none;
@@ -184,6 +212,7 @@ const getLinkAttributes = (external?: boolean) =>
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .terminal-info-data,
     a.terminal-info-label,
     a.terminal-info-value {
       transition: none;

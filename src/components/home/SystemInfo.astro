@@ -33,7 +33,9 @@ const items = [
   },
   {
     label: "theme",
-    value: "terminal",
+    value: "red",
+    valueAction: "cycle-accent" as const,
+    valueAriaLabel: "Current accent colour: red. Click to change.",
     desktopOnly: true,
   },
 ];
@@ -44,3 +46,8 @@ const items = [
   ariaLabel="system information"
   items={items}
 />
+
+<script>
+  import { initialiseAccentPicker } from "@/lib/theme";
+  initialiseAccentPicker();
+</script>

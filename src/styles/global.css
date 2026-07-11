@@ -7,8 +7,12 @@
   --color-text: #f5f1f1;
   --color-muted: #aaa3a3;
 
-  --color-accent: #b11226;
-  --color-accent-bright: #ff1744;
+  --color-accent-red: #ff1744;
+  --color-accent-green: #27e272;
+  --color-accent-blue: #1f8fff;
+
+  --color-accent: var(--color-accent-red);
+
   --color-positive-bright: #39ff88cd;
 
   --cat-intro-time: 2.5s;
@@ -64,10 +68,6 @@ a {
   color: var(--color-text);
   transition: var(--color-transition);
   text-decoration: none;
-}
-
-a:hover {
-  color: var(--color-accent-bright);
 }
 
 main {
